@@ -1,0 +1,3 @@
+# Maya
+- No emulador **IGCN (MU Online)** existe um plugin de sistema de Jornada a onde os jogadores recebem uma recompensas ao subir de level<br> e em alguns servidores o backend não valida as informações dos jogadores antes de adicionar a recompensa aos jogadores e com isso você pode acabar pegando as últimas recompensas estão no level 1
+- Sendo bem sincera eu amo Mu Online, porém, o grind é insuportavel e abusar de uma falha as vezes para se beneficar não faz mal a ninguém
