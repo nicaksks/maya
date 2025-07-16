@@ -1,4 +1,5 @@
 import { REWARDS, SERVER_LIST } from "../constants";
+import MayaError from "../errors/MayaError";
 import type { Server } from "./types/Servers";
 
 export class Maya {
@@ -11,7 +12,7 @@ export class Maya {
     public static async getRewards(server: Server): Promise<string> {
 
         if (!SERVER_LIST[server.name]) {
-            throw new Error('Servidor invalido.')
+            throw new MayaError('Servidor invalido.')
         }
 
         const response = await fetch(`${SERVER_LIST[server.name].reward}/${server.rewardId}`, {
@@ -21,13 +22,14 @@ export class Maya {
 
         if (!response.ok) {
             console.debug('[helpers/Maya.ts] -> %s', response.text())
-            throw new Error('Não foi possível resgatar essa recompensa.')
+            throw new MayaError('Não foi possível resgatar essa recompensa.')
         }
 
         const data = await response.json() as { error?: string };
 
         if ('error' in data) {
-            throw new Error(this.MESSAGES[data.error!] || 'Você já resgatou essa recompensa nesse personagem.')
+            console.debug('[helpers/Maya.ts] -> %s', data.error)
+            throw new MayaError(this.MESSAGES[data.error!] || 'Você já resgatou essa recompensa nesse personagem.')
         }
 
         return REWARDS[server.name][server.rewardId]!.join('\n');
