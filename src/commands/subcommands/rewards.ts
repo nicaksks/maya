@@ -7,13 +7,13 @@ export default async (interaction: ChatInputCommandInteraction, nickname: string
 
     await interaction.deferReply({ flags: 'Ephemeral' })
 
-    const server = interaction.options.getString('server');
+    const server = interaction.options.getString('server') as SERVERLIST;
 
     const rewards: string[] = []
 
-    for (const itemId of Object.keys(REWARDS[server as SERVERLIST])) {
+    for (const itemId of Object.keys(REWARDS[server])) {
         try {
-            const reward = await Maya.getRewards({ name: server as SERVERLIST, nickname, rewardId: itemId })
+            const reward = await Maya.getRewards({ name: server, nickname, rewardId: itemId })
             rewards.push(reward);
         } catch (e: any) {
             if (e?.message.startsWith('O grimório')) {
@@ -21,7 +21,6 @@ export default async (interaction: ChatInputCommandInteraction, nickname: string
                     `${e.message} \nAs seguintes recompensas que foram resgatadas: \n\n${rewards.join(', ')}` :
                     e.message
             }
-            continue
         }
     }
 
