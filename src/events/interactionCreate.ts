@@ -1,4 +1,4 @@
-import { AutocompleteInteraction, ChatInputCommandInteraction, Events, MessageFlags, type CacheType, type Interaction } from "discord.js";
+import { Events, MessageFlags, type Interaction } from "discord.js";
 import MayaError from "../errors/MayaError";
 
 export default {
