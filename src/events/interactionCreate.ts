@@ -19,6 +19,7 @@ export default {
         if (!command) {
             console.debug('[events/interactionCreate.ts] -> Command name %s not found.', interaction.commandName)
             interaction.reply({ content: 'Esse comando não existe.', flags: MessageFlags.Ephemeral })
+            return
         }
 
         if (interaction.isChatInputCommand()) {
